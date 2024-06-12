@@ -8,6 +8,9 @@ const routeHandler = (req, res) => {
 
     if (path === '/users' || path.startsWith('/users/')) {
         userRoutes(req, res);
+    } else if (path.startsWith('')) {
+        res.writeHead(200);
+        res.end(JSON.stringify({ message: 'Start page' }));
     } else {
         res.setHeader('Content-Type', 'application/json')
         res.writeHead(404);

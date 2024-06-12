@@ -1,6 +1,13 @@
-const data = require('../../data');
+const data = require('../../sql3-data');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     res.writeHead(200);
-    res.end(JSON.stringify(data.getUsers()));
-}
+    res.end(JSON.stringify(await data.getUsers()));
+};
+
+// const data = require('../../data');
+
+// module.exports = (req, res) => {
+//     res.writeHead(200);
+//     res.end(JSON.stringify(data.getUsers()));
+// }

@@ -29,4 +29,4 @@ const requestHandler = (req, res) => {
     }
 };
 
-module.exports = routeHandler;
+module.exports = requestHandler;
