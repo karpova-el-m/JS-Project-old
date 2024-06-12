@@ -3,7 +3,6 @@ const data = require('../../sql3-data');
 module.exports = async (req, res) => {
     const id = parseInt(req.url.split('/')[2]);
     const success = await data.deleteUser(id);
-    // res.end(JSON.stringify(success));
     if (success) {
         res.end(JSON.stringify({ message: 'User deleted' }));
     } else {

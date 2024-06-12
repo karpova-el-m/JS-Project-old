@@ -55,21 +55,8 @@ module.exports = {
         return this.getUserById(id);
     },
 
-    async deleteUser(id) {
-        const changes = await new Promise((resolve, reject) => {
-            db.all('DELETE FROM users WHERE id = ?', [id], (err, result) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(result);
-                }
-            });
-        });
-            return changes;
-    },
-
     async getUserById(id) {
-        try {const user = await new Promise((resolve, reject) => {
+        const user = await new Promise((resolve, reject) => {
             db.all('SELECT * FROM users WHERE id = ?', [id], (err, row) => {
                 if (err) {
                     reject(err);
@@ -79,8 +66,18 @@ module.exports = {
             });
         });
         return user;
-        } catch {
-            return 'User not found';
-        }
+    },
+
+    async deleteUser(id) {
+        const changes = await new Promise((resolve, reject) => {
+            db.all('DELETE FROM users WHERE id = ?', [id], function (err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(this.changes);
+                }
+            });
+        });
+        return changes > 0;
     }
 };
